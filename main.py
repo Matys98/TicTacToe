@@ -40,10 +40,8 @@ def positionOnBoard(position):
 def test_is_this_position_free():
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     board[1][1] = colored("x", 'red')
-    result = is_this_position_free(board, (1,1))
-    assert is_this_position_free(board, (2,2)) == ("-1", "-1"), "Why" + str(result[0]) + str(result[1])
-    result = is_this_position_free(board,(1,1))
-    assert is_this_position_free(board,(1,1)) == (1,1), "Should be (1,1)" + str(result[0]) + str(result[1])
+    assert is_this_position_free(board, (2,2)) == ("-1", "-1"), "Should be (-1, -1)"
+    assert is_this_position_free(board,(1,1)) == (1,1), "Should be (1,1)"
 
 def is_this_position_free(board, position):
     x = colored("x", 'red')
@@ -60,8 +58,8 @@ def test_player_move():
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     board[1][1] = colored("x", 'red')
-    assert player_move(player, position, board) == (board, False), "Should be (Board False)" + board[1][0] + board[1][1] + board[1][2]
-
+    assert player_move(player, position, board) == (board, False), "Should be (Board False)"
+    
     player = 2
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
@@ -70,7 +68,7 @@ def test_player_move():
 
     correct_board[positionXY[0]-1][positionXY[1]-1] = colored("o", "green")
     result = (correct_board, True)
-    assert player_move(player, position, board) == (correct_board, True), "Should be (Board True): \n" + str(result[0]) + "\n" + str(result[1]) + "\n" + str(correct_board)
+    assert player_move(player, position, board) == (correct_board, True), "Should be (Board True)"
 
 
 def player_move(player, position, board):
@@ -93,7 +91,7 @@ def test_whoWin():
         boardWin[2][i] = colored("x", 'red')
         boardWinBlue[2][i] = colored("x", 'blue')
 
-    assert whoWin(boardWin) == (True, colored("x", 'red'), boardWinBlue), "Should be (True, player, board)" + "\n" + str(boardWin) + "\n" + str(boardWinBlue)
+    assert whoWin(boardWin) == (True, colored("x", 'red'), boardWinBlue), "Should be (True, player, board)"
 
     boardClear = [["_","_","_"],["_","_","_"],["_","_","_"]]
     assert whoWin(boardClear) == (False, 0, boardClear), "Should be (False, 0, boardClear)"
@@ -102,7 +100,6 @@ def test_whoWin():
 def whoWin(board):
     x = colored("x", 'red')
     o = colored("o", 'green')
-    print(colored(x, 'blue'))
     for player in (x, o):
         for i in (0,1,2):
             if board[i][0] == player and board[i][1] == player and board[i][2] == player:
