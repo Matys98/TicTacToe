@@ -165,7 +165,7 @@ while 1:
         display(board, example)
         print("\n"+x+" move:") if posible_moves % 2 + 1 == 1 else print("\n"+o+" move:") 
         if posible_moves % 2 + 1 == 1:
-            player_move_correct = player_move(posible_moves % 2 + 1, int(input()), board) #
+            player_move_correct = player_move(posible_moves % 2 + 1, randint(1,9), board) #
         else:
             if posible_moves == 9:                
                 player_move_correct = player_move(posible_moves % 2 + 1, randint(1,9), board)
