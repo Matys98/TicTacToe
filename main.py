@@ -59,11 +59,7 @@ def test_player_move():
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     board[1][1] = colored("x", 'red')
     assert player_move(player, position, board) == (board, False), "Should be (Board False)"
-<<<<<<< HEAD
-
-=======
     
->>>>>>> bd239b250202dc2d5748f9f4a9098ee7dc3aac5e
     player = 2
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
