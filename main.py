@@ -1,6 +1,8 @@
 import sys
 from random import randint, random
-if sys.version_info[0] == 3: from termcolor import colored;
+if sys.version_info[0] == 3: 
+    from termcolor import colored
+    print("python 3")
 import time
 
 def test_positionOnBoard():
