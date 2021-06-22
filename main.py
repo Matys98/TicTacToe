@@ -1,6 +1,6 @@
-
+import sys
 from random import randint, random
-from termcolor import colored
+if sys.version_info[0] == 3: from termcolor import colored;
 import time
 
 def test_positionOnBoard():
@@ -38,14 +38,22 @@ def positionOnBoard(position):
     return (positionY, positionX)
 
 def test_is_this_position_free():
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+    else:
+        x = "x"
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
-    board[1][1] = colored("x", 'red')
+    board[1][1] = x
     assert is_this_position_free(board, (2,2)) == ("-1", "-1"), "Should be (-1, -1)"
     assert is_this_position_free(board,(1,1)) == (1,1), "Should be (1,1)"
 
 def is_this_position_free(board, position):
-    x = colored("x", 'red')
-    o = colored("o", 'green')
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+        o = colored("o", 'green')
+    else: 
+        x = "x"
+        o = "o"
     positionX = position[1]
     positionY = position[0]
     if board[positionY-1][positionX-1] != x and board[positionY-1][positionX-1] != o:
@@ -57,23 +65,32 @@ def test_player_move():
     player = 1
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
-    board[1][1] = colored("x", 'red')
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+        o = colored("o", 'green')
+    else: 
+        x = "x"
+        o = "o"
+    board[1][1] = x
     assert player_move(player, position, board) == (board, False), "Should be (Board False)"
-    
+
     player = 2
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     correct_board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     positionXY = is_this_position_free(board, positionOnBoard(position))
-
-    correct_board[positionXY[0]-1][positionXY[1]-1] = colored("o", "green")
+    correct_board[positionXY[0]-1][positionXY[1]-1] = o
     result = (correct_board, True)
     assert player_move(player, position, board) == (correct_board, True), "Should be (Board True)"
 
 
 def player_move(player, position, board):
-    x = colored("x", 'red')
-    o = colored("o", 'green')
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+        o = colored("o", 'green')
+    else:
+        x = "x"
+        o = "o"
     positionXY = is_this_position_free(board, positionOnBoard(position))
     if positionXY[0] != "-1" or positionXY[1] != "-1":
         if player == 1:
@@ -87,40 +104,55 @@ def player_move(player, position, board):
 def test_whoWin():
     boardWinBlue = [["_","_","_"],["_","_","_"],["_","_","_"]]
     boardWin = [["_","_","_"],["_","_","_"],["_","_","_"]]
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+        xblue = colored("x", 'blue')
+    else: 
+        x = "x"
+        xblue = "x"
     for i in range(0,3):
-        boardWin[2][i] = colored("x", 'red')
-        boardWinBlue[2][i] = colored("x", 'blue')
+        boardWin[2][i] = x
+        boardWinBlue[2][i] = xblue
 
-    assert whoWin(boardWin) == (True, colored("x", 'red'), boardWinBlue), "Should be (True, player, board)"
+    assert whoWin(boardWin) == (True, x, boardWinBlue), "Should be (True, player, board)"
 
     boardClear = [["_","_","_"],["_","_","_"],["_","_","_"]]
     assert whoWin(boardClear) == (False, 0, boardClear), "Should be (False, 0, boardClear)"
 
 
 def whoWin(board):
-    x = colored("x", 'red')
-    o = colored("o", 'green')
+    if sys.version_info[0] == 3: 
+        x = colored("x", 'red')
+        o = colored("o", 'green')
+        xblue = colored("x", 'blue')
+        oblue = colored("o", 'blue')
+    else: 
+        x = "x"
+        o = "o"
+        xblue = "x"
+        oblue = "o"
+
     for player in (x, o):
         for i in (0,1,2):
             if board[i][0] == player and board[i][1] == player and board[i][2] == player:
-                board[i][0] = colored("x", 'blue') if player == x else colored("o", 'blue') 
-                board[i][1] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[i][2] = colored("x", 'blue') if player == x else colored("o", 'blue')
+                board[i][0] = xblue if player == x else oblue 
+                board[i][1] = xblue if player == x else oblue
+                board[i][2] = xblue if player == x else oblue
                 return (True, player, board)
             elif board[0][i] == player and board[1][i] == player and board[2][i] == player:
-                board[0][i] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[1][i] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[2][i] = colored("x", 'blue') if player == x else colored("o", 'blue')
+                board[0][i] = xblue if player == x else oblue
+                board[1][i] = xblue if player == x else oblue
+                board[2][i] = xblue if player == x else oblue
                 return (True, player, board)
         if board[0][0] == player and board[1][1] == player and board[2][2] == player:
-                board[0][0] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[1][1] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[2][2] = colored("x", 'blue') if player == x else colored("o", 'blue')
+                board[0][0] = xblue if player == x else oblue
+                board[1][1] = xblue if player == x else oblue
+                board[2][2] = xblue if player == x else oblue
                 return (True, player, board)
         elif board[0][2] == player and board[1][1] == player and board[2][0] == player:
-                board[0][2] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[1][1] = colored("x", 'blue') if player == x else colored("o", 'blue')
-                board[2][0] = colored("x", 'blue') if player == x else colored("o", 'blue')
+                board[0][2] = xblue if player == x else oblue
+                board[1][1] = xblue if player == x else oblue
+                board[2][0] = xblue if player == x else oblue
                 return (True, player, board)   
     return (False, 0, board)
 
@@ -154,8 +186,12 @@ example = [["1","2","3"],["4","5","6"],["7","8","9"]]
 board = [["_","_","_"],["_","_","_"],["_","_","_"]]
 posible_moves = 9
 
-x = colored("x", 'red')
-o = colored("o", 'green')
+if sys.version_info[0] == 3: 
+    x = colored("x", 'red')
+    o = colored("o", 'green')
+else:
+    x = "x"
+    o = "o"
 
 while 1:
     if posible_moves > 0:
