@@ -44,4 +44,4 @@ jobs:
       - name: Test with pytest
         run: |
           echo(${{ matrix.python-version }})
-          if [${{ matrix.python-version }} -nq 2.7]; then python3 main.py else python main.py fi
+          if ["${{ matrix.python-version }}" = "2.7"]; then python3 main.py else python main.py fi
