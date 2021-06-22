@@ -43,5 +43,10 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         run: |
-          echo(${{ matrix.python-version }})
-          if ["${{ matrix.python-version }}" = "2.7"]; then python3 main.py else python main.py fi
+          if ["${{ matrix.python-version }}" = "2.7"]; then 
+            echo("2.7")  
+            python main.py 
+          else 
+            echo("${{ matrix.python-version }}")  
+            python3 main.py 
+          fi
