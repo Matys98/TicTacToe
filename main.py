@@ -59,7 +59,11 @@ def test_player_move():
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
     board[1][1] = colored("x", 'red')
     assert player_move(player, position, board) == (board, False), "Should be (Board False)"
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> bd239b250202dc2d5748f9f4a9098ee7dc3aac5e
     player = 2
     position = 5
     board = [["_","_","_"],["_","_","_"],["_","_","_"]]
@@ -100,7 +104,6 @@ def test_whoWin():
 def whoWin(board):
     x = colored("x", 'red')
     o = colored("o", 'green')
-    print(colored(x, 'blue'))
     for player in (x, o):
         for i in (0,1,2):
             if board[i][0] == player and board[i][1] == player and board[i][2] == player:
