@@ -200,7 +200,8 @@ else:
 while 1:
     if posible_moves > 0:
         display(board, example)
-        if posible_moves % 2 + 1 == 1: print("\n", x, " move:"); print("\n", o, " move:") 
+        if posible_moves % 2 + 1 == 1: print("\n", x, " move:")
+        else: print("\n", o, " move:") 
         if posible_moves % 2 + 1 == 1:
             player_move_correct = player_move(posible_moves % 2 + 1, int(input()), board) #int(input())
         else:
